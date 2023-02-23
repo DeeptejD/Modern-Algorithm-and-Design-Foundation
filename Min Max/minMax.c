@@ -1,4 +1,5 @@
 #include <stdio.h>
+#define sint(x) scanf("%d", &x);
 
 void minMax(int a[], int l, int r, int *min, int *max)
 {
@@ -21,10 +22,14 @@ void minMax(int a[], int l, int r, int *min, int *max)
 
 int main(int argc, char const *argv[])
 {
-    int min, max, a[] = {23, 34, 56, 78, 21, 12, 9, 43, 50};
-    int s = sizeof(a) / sizeof(a[0]);
+    int size, min, max;
+    printf("Enter size of the array: ");
+    sint(size);
+    int a[size];
+    for (int i = 0; i < size; i++)
+        sint(a[i]);
 
-    minMax(a, 0, s - 1, &min, &max);
+    minMax(a, 0, size - 1, &min, &max);
 
     printf("%d: min\n%d: max\n", min, max);
     return 0;
