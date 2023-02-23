@@ -1,23 +1,7 @@
-// AlgorithmMergeSort(low >, high) 2
-// a[low :high]is a globalarray to be sorted.
-// Small(P)is true if thereis only one element to sort
-// In this case the list is already sorted.
-// if (low < high) then
-// If there are more than one element
-// {
-//  // DivideP into subproblems.
-//  // Find where to split the set.
-//  mid:=[(low+high)/2\\; 11 // Solvethe subproblems
-// MergeSort(low,mid);
-// 13 MergeSort(mid+ I,high);
-// Combinethe solutions.
-//  Merge(low,mid,high); 16
-// }
-// }
-
 #include <stdio.h>
 #include <stdlib.h>
-
+#define sint(x) scanf("%d", &x);
+#define schar(x) scanf(" %c", &x);
 void charmerge(char arr[], int left, int mid, int right)
 {
     int i, j, k;
@@ -164,20 +148,70 @@ int bs(char arr[], char item, int low, int up)
 
 int main(int argc, char const *argv[])
 {
-    char charr[] = "JPNSOBVWKER";
-    int arr[] = {65, 18, 40, 50, 80, 90, 110, 20, 25, -75, 20};
-    int charsize = sizeof(charr) / sizeof(charr[0]), intsize = sizeof(arr) / sizeof(arr[0]);
-    // sorting int arr in reverse and char arr in anti-reverse
-    intmergesort(arr, 0, intsize - 1);
-    charmergesort(charr, 0, charsize - 1);
+    int intsize, charsize;
+    printf("Enter size: ");
+    sint(intsize);
+    int arr[intsize];
 
-    // printArray(arr, intsize);
-    // charprintArray(charr, charsize);
+    printf("Enter size: ");
+    sint(charsize);
+    char charr[charsize];
+    while (1)
+    {
+        printf("Choose an option\n1. Enter int array\n2. Enter char array\n3. Sort int array (reverse)\n4. Sort char array (ascending)\n5. Perform Binary Search\n6. Display arrays\n");
+        int choice;
+        sint(choice);
 
-    // searching 'o' using binary search in charr
-    if (bs(charr, 0, charsize - 1, 'O') != -1)
-        printf("Found 'O'\n");
-    else
-        printf("Not Found 'O'\n");
+        switch (choice)
+        {
+        case 1:
+        {
+
+            for (int i = 0; i < intsize; i++)
+                sint(arr[i]);
+            break;
+        }
+
+        case 2:
+        {
+
+            for (int i = 0; i < charsize; i++)
+                schar(charr[i]);
+            break;
+        }
+
+        case 3:
+        {
+            intmergesort(arr, 0, intsize - 1);
+            break;
+        }
+
+        case 4:
+        {
+            charmergesort(charr, 0, charsize - 1);
+            break;
+        }
+
+        case 5:
+        {
+            int ch;
+            printf("Enter the character to be searched: ");
+            schar(ch);
+            if (bs(charr, ch, 0, charsize - 1) == -1)
+                printf("%c not found\n", ch);
+            else
+                printf("%c found\n", ch);
+            break;
+        }
+
+        case 6:
+            printArray(arr, intsize);
+            charprintArray(charr, charsize);
+            break;
+
+        case 7:
+            break;
+        }
+    }
     return 0;
 }
