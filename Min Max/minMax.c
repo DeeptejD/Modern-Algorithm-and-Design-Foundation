@@ -7,28 +7,15 @@ void minMax(int a[], int l, int r, int *min, int *max)
     if (l == r)
         *min = a[l], *max = a[l];
     else if (r == l + 1)
-    {
-        if (a[l] < a[r])
-            *min = a[l], *max = a[r];
-        else
-            *min = a[r], *max = a[l];
-    }
+        a[l] < a[r] ? (*min = a[l], *max = a[r]) : (*min = a[r], *max = a[l]);
     else
     {
-        // we find mid
         int mid = (l + r) / 2;
         minMax(a, l, mid, &lmin, &lmax);
+        printf("min: %d, max: %d\n", lmin, lmax);
         minMax(a, mid + 1, r, &rmin, &rmax);
-
-        if (lmin < rmin)
-            *min = lmin;
-        else
-            *min = rmin;
-
-        if (lmax > rmax)
-            *max = lmax;
-        else
-            *max = rmax;
+        printf("min: %d, max: %d\n", rmin, rmax);
+        *min = (lmin < rmin) ? lmin : rmin, *max = (lmax > rmax) ? lmax : rmax;
     }
 }
 
