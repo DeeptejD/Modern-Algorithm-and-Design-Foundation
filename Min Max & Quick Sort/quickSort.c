@@ -1,6 +1,7 @@
 #include <stdio.h>
-
+#define sint(x) scanf("%d", &x);
 // utility functions for qs
+int size, count = 1;
 
 void sw(int a[], int i, int j)
 {
@@ -36,6 +37,8 @@ void qs(int a[], int l, int r)
     if (l < r)
     {
         int p = part(a, l, r);
+        printf("pass %d: ", count), count++;
+        dis(a, size);
         qs(a, l, p - 1);
         qs(a, p + 1, r);
     }
@@ -43,10 +46,15 @@ void qs(int a[], int l, int r)
 
 int main(int argc, char const *argv[])
 {
-    int a[] = {2, 3, 4, 6, 8, 9, 12, 22, 1};
-    int s = sizeof(a) / sizeof(a[0]);
-    dis(a, s);
-    qs(a, 0, s - 1);
-    dis(a, s);
+    printf("Enter size of the array: ");
+    sint(size);
+    int a[size];
+    for (int i = 0; i < size; i++)
+        sint(a[i]);
+    printf("Original Array: ");
+    dis(a, size);
+    qs(a, 0, size - 1);
+    printf("Sorted Array: ");
+    dis(a, size);
     return 0;
 }
