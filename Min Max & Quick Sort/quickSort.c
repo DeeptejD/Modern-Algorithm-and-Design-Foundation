@@ -28,8 +28,7 @@ int part(int a[], int l, int r)
         }
     }
     sw(a, i, r);
-    return i; // returning the new pivot
-}
+    return i;
 
 void qs(int a[], int l, int r)
 {
