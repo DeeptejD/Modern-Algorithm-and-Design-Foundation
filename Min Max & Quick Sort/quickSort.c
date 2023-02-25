@@ -44,7 +44,7 @@ void qs(int a[], int l, int r)
     }
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     printf("Enter size of the array: ");
     sint(size);
