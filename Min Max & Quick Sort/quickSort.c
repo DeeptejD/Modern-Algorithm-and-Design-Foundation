@@ -18,17 +18,17 @@ void dis(int a[], int s)
 
 int part(int a[], int l, int r)
 {
-    int piv = a[r], i = l - 1; // we choose the rightmost element is the pivot
+    int piv = a[r], i = l; // we choose the rightmost element is the pivot
     for (int j = l; j < r; j++)
     {
         if (a[j] < piv)
         {
-            i++;
             sw(a, i, j);
+            i++;
         }
     }
-    sw(a, i + 1, r);
-    return i + 1; // returning the new pivot
+    sw(a, i, r);
+    return i; // returning the new pivot
 }
 
 void qs(int a[], int l, int r)
