@@ -1,3 +1,24 @@
+// Enter size of the array: 9
+// 86
+// 23
+// 10
+// 44
+// 90
+// 5
+// -12
+// 55
+// 37
+// min: 23, max: 86
+// min: 10, max: 10
+// min: 10, max: 86
+// min: 44, max: 90
+// min: 10, max: 90
+// min: -12, max: 5
+// min: 37, max: 55
+// min: -12, max: 55
+// -12: min
+// 90: max
+
 #include <stdio.h>
 #define sint(x) scanf("%d", &x);
 
