@@ -1,28 +1,30 @@
-// Enter the int array
-// 65
-// 18
-// 40
-// 50
-// 80
-// 90
-// 110
-// 20
-// 25
-// -75
-// 20
+// Enter character array
+// J
+// P
+// N
+// S
+// O
+// B
+// V
+// W
+// K
+// E
+// R
 // Array after merge sort
-// 110, 90, 80, 65, 50, 40, 25, 20, 20, 18, -75,
+// B, E, J, K, N, O, P, R, S, V, W,
 
 #include <stdio.h>
 #include <stdlib.h>
+#define schar(x) scanf(" %c", &x);
 #define sint(x) scanf("%d", &x);
 
-void intmerge(int arr[], int left, int mid, int right)
+void charmerge(char arr[], int left, int mid, int right)
 {
+
     int i, j, k;
     int n1 = mid - left + 1;
     int n2 = right - mid;
-    int L[n1], R[n2];
+    char L[n1], R[n2];
     for (i = 0; i < n1; i++)
         L[i] = arr[left + i];
     for (j = 0; j < n2; j++)
@@ -33,7 +35,7 @@ void intmerge(int arr[], int left, int mid, int right)
     k = left;
     while (i < n1 && j < n2)
     {
-        if (L[i] >= R[j])
+        if (L[i] <= R[j])
         {
             arr[k] = L[i];
             i++;
@@ -60,36 +62,36 @@ void intmerge(int arr[], int left, int mid, int right)
     }
 }
 
-void intmergesort(int arr[], int left, int right)
+void charmergesort(char arr[], int left, int right)
 {
     if (left < right)
     {
         int mid = left + (right - left) / 2;
-        intmergesort(arr, left, mid);
-        intmergesort(arr, mid + 1, right);
+        charmergesort(arr, left, mid);
+        charmergesort(arr, mid + 1, right);
 
-        intmerge(arr, left, mid, right);
+        charmerge(arr, left, mid, right);
     }
 }
 
-void printArray(int arr[], int n)
+void charprintArray(char arr[], int n)
 {
     for (int i = 0; i < n; i++)
-        printf("%d, ", arr[i]);
+        printf("%c, ", arr[i]);
     printf("\n");
 }
 
 int main(int argc, char const *argv[])
 {
-    int intsize;
+    int charsize;
     printf("Enter size: ");
-    sint(intsize);
-    int arr[intsize];
-    printf("Enter the int array\n");
-    for (int i = 0; i < intsize; i++)
-        sint(arr[i]);
-    intmergesort(arr, 0, intsize - 1);
+    sint(charsize);
+    char charr[charsize];
+    printf("Enter character array\n");
+    for (int i = 0; i < charsize; i++)
+        schar(charr[i]);
+    charmergesort(charr, 0, charsize - 1);
     printf("Array after merge sort\n");
-    printArray(arr, intsize);
+    charprintArray(charr, charsize);
     return 0;
 }
