@@ -25,3 +25,47 @@ product of the two matrices
 
 ```
 
+```
+Generalised Strassens
+
+Enter the size (order 2x): 4
+Enter the elements of matrix a
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+Enter the elements of matrix b
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+The product of the two matrices is
+   4   4   4   4
+   4   4   4   4
+   4   4   4   4
+   4   4   4   4
+```
