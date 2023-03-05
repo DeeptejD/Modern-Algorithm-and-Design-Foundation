@@ -31,22 +31,48 @@ int part(char a[], int l, int r)
 
 void ksmall(char a[], int l, int r, int x)
 {
-    if (l <= r)
+
+    if (r < x)
+    {
+        printf("out of bounds\n");
+        return;
+    }
+
+    do
     {
         int p = part(a, l, r);
         printf("pivot: %d\n", p);
         if (p == x)
         {
-            printf("%dth smallest element is: %c\n", ++x, a[p]);
+            printf("The kth smallest element is: %c\n", a[p]);
             return;
         }
         else if (p > x)
-            ksmall(a, l, p - 1, x);
-        else if (p < x)
-            ksmall(a, p + 1, r, x);
-    }
-    else
-        printf("The element is not present\n");
+            r = p - 1;
+        else
+            l = p + 1;
+
+    } while (l <= r);
+
+    printf("The kth smallest element is not present\n");
+    return;
+
+    // if (l <= r)
+    // {
+    //     int p = part(a, l, r);
+    //     printf("pivot: %d\n", p);
+    //     if (p == x)
+    //     {
+    //         printf("%dth smallest element is: %c\n", ++x, a[p]);
+    //         return;
+    //     }
+    //     else if (p > x)
+    //         ksmall(a, l, p - 1, x);
+    //     else if (p < x)
+    //         ksmall(a, p + 1, r, x);
+    // }
+    // else
+    //     printf("The element is not present\n");
 }
 
 int main()
