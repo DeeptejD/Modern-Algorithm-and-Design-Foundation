@@ -56,18 +56,8 @@ void showmat(int a[][N], int n)
     }
 }
 
-int main()
+int prim(int e[][N], int cost[][N], int n, int t[][2])
 {
-    // Getting the input for cost and e matrices
-    int n;
-    printf("Enter the number of nodes: ");
-    sint(n);
-    int e[N][N], cost[N][N], t[N][2];
-    fillzeroes(e, n), fillinf(cost, n);
-    getmat(cost, e, n);
-    showmat(cost, n), showmat(e, n);
-
-    // finding an edge (k, l) st it has the min cost
     int k, l, min = __INT_MAX__;
     for (int i = 0; i < n; i++)
     {
@@ -128,6 +118,22 @@ int main()
         }
         printf("\n");
     }
+    return mincost;
+}
+
+int main()
+{
+    // Getting the input for cost and e matrices
+    int n;
+    printf("Enter the number of nodes: ");
+    sint(n);
+    int e[N][N], cost[N][N], t[N][2];
+    fillzeroes(e, n), fillinf(cost, n);
+    getmat(cost, e, n);
+    showmat(cost, n), showmat(e, n);
+
+    // finding an edge (k, l) st it has the min cost
+    int mincost = prim(e, cost, n, t);
     printf("mincost: %d\n", mincost);
     return 0;
 }
