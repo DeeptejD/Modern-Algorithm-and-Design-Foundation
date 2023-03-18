@@ -145,3 +145,18 @@ int main(int argc, char const *argv[])
         printf("no mst\n");
     return 0;
 }
+
+/*
+8 11
+1 2 12
+1 3 11
+3 4 14
+2 4 4
+4 6 8
+2 5 5
+4 5 3
+4 7 6
+6 7 15
+5 8 17
+7 8 10
+*/
