@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <limits.h>
+#include <string.h>
 #define sint(x) scanf("%d", &x);
 #define N 20
 #define inf INT_MAX
@@ -21,6 +22,12 @@ void get1(int a[N], int n)
         sint(a[i]);
 }
 
+void get1s(int a[N], int n)
+{
+    for (int i = 1; i <= n; i++)
+        gets(a[i]);
+}
+
 int find(struct key g[][N], int i, int j)
 {
     int min = inf, l;
@@ -35,7 +42,7 @@ int find(struct key g[][N], int i, int j)
     return l;
 }
 
-void obst(struct key g[][N], int q[N], int p[N], int n)
+void obst(struct key g[][N], int q[N], int p[N], int n, char *a[N])
 {
     int k;
     for (int i = 0; i <= n - 1; i++)
@@ -58,32 +65,30 @@ void obst(struct key g[][N], int q[N], int p[N], int n)
             g[i][j].r = k;
         }
     }
-    printf("c[%d][%d] = %d\nw[%d][%d] = %d\nr[%d][%d] = %d\nMinimum cost of the BST is: %d\n", 0, n, g[0][n].c, 0, n, g[0][n].w, 0, n, g[0][n].r, g[0][n].c);
+    printf("c[%d][%d] = %d\nw[%d][%d] = %d\nr[%d][%d] = %d\nMinimum cost of the BST is: %d\nroot: %s\n", 0, n, g[0][n].c, 0, n, g[0][n].w, 0, n, g[0][n].r, g[0][n].c, a[g[0][n].r - 1]);
 }
 
 int main(int argc, char const *argv[])
 {
     int n;
-    int a[N], p[N], q[N];
+    char *a[N] = {"Apr", "Mar", "May", "Oct", "Sept"};
+    int p[N], q[N];
     struct key g[N][N];
     printf("Enter the number of identifiers: ");
     sint(n);
-    printf("Enter the identifiers: ");
-    get1(a, n);
+    // printf("Enter the identifiers: ");
+    // get1s(a, n);
     printf("Enter the probabilities for a succesfull search: ");
     get1(p, n);
     printf("Enter the probablities for an unsuccesfull search: ");
     get0(q, n);
-    obst(g, q, p, n);
+    obst(g, q, p, n, a);
     return 0;
 }
 
 /*
+textbook 5.18
 4
-211
-207
-331
-537
 3
 3
 1
@@ -93,4 +98,32 @@ int main(int argc, char const *argv[])
 1
 1
 1
+*/
+
+/*
+textbook 5.17
+3
+1
+1
+1
+1
+1
+1
+1
+*/
+
+/*
+tutorial
+5
+3
+4
+3
+2
+4
+4
+4
+5
+4
+5
+4
 */
