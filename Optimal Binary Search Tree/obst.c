@@ -38,7 +38,7 @@ int find(struct key g[][N], int i, int j)
 void obst(struct key g[][N], int q[N], int p[N], int n)
 {
     int k;
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i <= n - 1; i++)
     {
         // init
         g[i][i].w = q[i], g[i][i].r = g[i][i].c = 0;
@@ -58,7 +58,7 @@ void obst(struct key g[][N], int q[N], int p[N], int n)
             g[i][j].r = k;
         }
     }
-    printf("c[%d][%d] = %d\nw[%d][%d] = %d\nr[%d][%d] = %d\n", 0, n, g[0][n].c, 0, n, g[0][n].w, 0, n, g[0][n].r);
+    printf("c[%d][%d] = %d\nw[%d][%d] = %d\nr[%d][%d] = %d\nMinimum cost of the BST is: %d\n", 0, n, g[0][n].c, 0, n, g[0][n].w, 0, n, g[0][n].r, g[0][n].c);
 }
 
 int main(int argc, char const *argv[])
@@ -77,3 +77,20 @@ int main(int argc, char const *argv[])
     obst(g, q, p, n);
     return 0;
 }
+
+/*
+4
+211
+207
+331
+537
+3
+3
+1
+1
+2
+3
+1
+1
+1
+*/
