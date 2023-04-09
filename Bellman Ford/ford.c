@@ -123,6 +123,7 @@ int main(int argc, char const *argv[])
 }
 
 /*
+(sus test case)
 5
 1 2 4
 1 4 5
@@ -138,7 +139,7 @@ int main(int argc, char const *argv[])
 */
 
 /*
-textbook
+textbook (working test case)
 7
 1 2 6
 1 3 5
