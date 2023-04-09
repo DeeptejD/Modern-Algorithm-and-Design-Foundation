@@ -123,7 +123,7 @@ int main(int argc, char const *argv[])
 }
 
 /*
-(sus test case)
+(this testcase does not work cuz of a negative cycle)
 5
 1 2 4
 1 4 5
@@ -131,15 +131,15 @@ int main(int argc, char const *argv[])
 3 2 2
 3 5 1
 4 3 3
-4 5 -2
-5 4 -2
+4 5 -2 <-
+5 4 -2 <-
 5 2 -3
 -1 -1
 1
 */
 
 /*
-textbook (working test case)
+textbook
 7
 1 2 6
 1 3 5
