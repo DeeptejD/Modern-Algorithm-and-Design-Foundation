@@ -1,0 +1,29 @@
+0/1 knapsack table method
+-
+
+step 1: write number of items starting from 0 in the rows (vertical)
+
+step 2: write number of weights starting from 0 in the cols part (horizontal)
+
+step 3: fill the first row with zeroes
+
+step 4: row number tells us how many items we can use to create the weight in the col number
+say for example if the row is 2 and col is 3 then we need to see if we can use 2 items and make weight 3. finally we fill the profit value that is the max
+
+
+0/1 knapsack subset method
+-
+
+step 1: write S^0 = {(0,0)}
+
+step 2: we have a formula for S^0/1 = {(P, W) : (P - pi+1, W - wi+1) belongs to S^i}
+in other words if we need to find the S 0/1 here i=0, so in S 0/1 we choose all the (P,W) pairs such that P-p1, W-w1) belongs to S^0
+
+while making pairs we can also make pairs by adding the profits and weights of the level with the previous levels
+
+step 3: we then combine both S^i and S^i 1 together to get S^i+1
+
+step 4: we remove all the pairs where the weight increases but the profit does not increase
+
+step 5: we will also remove all the pairs where the weight is greater than the max knapsack weight
+
