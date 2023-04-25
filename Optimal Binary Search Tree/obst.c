@@ -4,6 +4,7 @@
 #define sint(x) scanf("%d", &x);
 #define N 20
 #define inf INT_MAX
+#define new printf("\n")
 
 struct key
 {
@@ -45,14 +46,28 @@ int find(struct key g[][N], int i, int j)
 void obst(struct key g[][N], int q[N], int p[N], int n, char *a[N])
 {
     int k;
-    for (int i = 0; i <= n - 1; i++)
+    printf("\tw\tc\tr");
+    new, new;
+    for (int i = 0; i <= n; i++)
     {
         // init
         g[i][i].w = q[i], g[i][i].r = g[i][i].c = 0;
         g[i][i + 1].w = q[i] + q[i + 1] + p[i + 1];
         g[i][i + 1].r = i + 1;
         g[i][i + 1].c = q[i] + q[i + 1] + p[i + 1];
+        printf("%d%d\t%d\t%d\t%d\n", i, i, g[i][i].w, g[i][i].c, g[i][i].r);
     }
+    new;
+    for (int i = 0, j = i + 1; i <= n - 1; i++, j++)
+    {
+        // init
+        // g[i][j].w = q[i], g[i][i].r = g[i][i].c = 0;
+        g[i][j].w = q[i] + q[j] + p[j];
+        g[i][j].r = i + 1;
+        g[i][j].c = q[i] + q[j] + p[j];
+        printf("%d%d\t%d\t%d\t%d\n", i, j, g[i][j].w, g[i][j].c, g[i][j].r);
+    }
+    new;
     g[n][n].w = q[n], g[n][n].r = g[n][n].c = 0;
     for (int m = 2; m <= n; m++)
     {
@@ -63,9 +78,11 @@ void obst(struct key g[][N], int q[N], int p[N], int n, char *a[N])
             k = find(g, i, j);
             g[i][j].c = g[i][j].w + g[i][k - 1].c + g[k][j].c;
             g[i][j].r = k;
+            printf("%d%d\t%d\t%d\t%d\n", i, j, g[i][j].w, g[i][j].c, g[i][j].r);
         }
+        new;
     }
-    printf("c[%d][%d] = %d\nw[%d][%d] = %d\nr[%d][%d] = %d\nMinimum cost of the BST is: %d\nroot: %s\n", 0, n, g[0][n].c, 0, n, g[0][n].w, 0, n, g[0][n].r, g[0][n].c, a[g[0][n].r - 1]);
+    printf("\nc[%d][%d] = %d\nw[%d][%d] = %d\nr[%d][%d] = %d\nMinimum cost of the BST is: %d\nroot: %s\n", 0, n, g[0][n].c, 0, n, g[0][n].w, 0, n, g[0][n].r, g[0][n].c, a[g[0][n].r - 1]);
 }
 
 int main(int argc, char const *argv[])

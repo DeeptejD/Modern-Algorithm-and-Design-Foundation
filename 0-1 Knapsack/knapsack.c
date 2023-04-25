@@ -3,6 +3,7 @@
 #define sint(x) scanf("%d", &x)
 #define N 200
 #define obj 100
+int count = 0; // this is used to print the subsets
 
 int size;
 
@@ -26,8 +27,15 @@ void purrrrrge(struct dp s[N])
         for (int j = 0; j < size; j++)
         {
             // a pair s is said to be dominant on another pair j if s has a lower weight and a heigher profit than j, in which which case, j can be eliminated (R.I.P. j)
-            if (s[i].p < s[j].p && s[i].w > s[j].w)
+            if (s[i].p < s[j].p && s[i].w >= s[j].w)
                 s[i].p = s[i].w = -1;
+            else if (s[j].p < s[i].p && s[j].w >= s[i].w)
+                s[j].p = s[j].w = -1;
+        }
+        for (int j = i + 1; j < size; j++)
+        {
+            if (s[i].p == s[j].p && s[i].w == s[j].w)
+                s[j].p = s[j].w = -1;
         }
     }
 }
@@ -71,7 +79,18 @@ void knap(int m, int n, int p[N], int w[N])
                 s[k].o[z] = s[j].o[z];
             s[k].o[i] += 1;
         }
-        size *= 2;
+        purrrrrge(s);
+        printf("S^%d = { ", count);
+        for (int i = 0; i < size; i++)
+        {
+            if (s[i].p == -1 && s[i].w == -1)
+                continue;
+            else
+                printf("(%d, %d) ", s[i].p, s[i].w);
+        }
+        printf("}");
+        printf("\n\n");
+        size *= 2, count++;
     }
     purrrrrge(s);
     int mw = -1, mp = -1, ind; // mp = max profit, mw = max weight, ind = index
