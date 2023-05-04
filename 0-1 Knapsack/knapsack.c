@@ -1,3 +1,4 @@
+// 211105017 Deeptej Dhauskar
 #include <stdio.h>
 #include <limits.h>
 #define sint(x) scanf("%d", &x)
@@ -57,7 +58,7 @@ void knap(int m, int n, int p[N], int w[N])
     {
         for (int j = 0, k = size; j < size; j++, k++)
         // j represents the index of the entry in the prev row that is being copied
-        // k represents the idex of the new entry that is beign created
+        // k represents the index of the new entry that is beign created
         {
             // check if the entry in the prev row is valid
             if (s[j].w == -1)
