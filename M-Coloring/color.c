@@ -11,7 +11,8 @@ void show(int x[N], int nodes)
 {
     printf("%d.\t", ++count);
     for (int i = 1; i <= nodes; i++)
-        printf("%c ", c[x[i]]); // we can simply print the int value of x[i] also but just adding some rizz
+        printf("%d ", x[i]); // we can simply print the int value of x[i] also but just adding some rizz
+    // printf("%c ", c[x[i]]);
     printf("\n");
 }
 
