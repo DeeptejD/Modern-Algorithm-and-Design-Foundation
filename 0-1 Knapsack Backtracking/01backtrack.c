@@ -11,7 +11,7 @@ void ratiosort(int p[], int w[], int n)
         for (int j = 1; j < n - i - 1 + 1; j++)
         {
             float prev = p[j] / w[j], next = p[j + 1] / w[j + 1];
-            if (prev > next)
+            if (prev >= next)
             {
                 int tp = p[j], tw = w[j];
                 p[j] = p[j + 1];
