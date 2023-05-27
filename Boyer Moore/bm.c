@@ -31,7 +31,7 @@ void bm(char t[], char p[], int n, int m)
         {
             if (!j)
             {
-                printf("Pattern found at index %d\n", i);
+                printf("Pattern %s found at index %d in %s\n", p, i, t);
                 return;
             }
             else
