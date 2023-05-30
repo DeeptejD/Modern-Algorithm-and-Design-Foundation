@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define N 50
-#define sint(x) scanf("%d", &x)
+// #define sint(x) scanf("%d", &x)
 
 // we will use a minheap to make sure that the node with the least frequency is always at the top
 struct minheapnode
@@ -94,7 +94,7 @@ void insert(struct minheap *minh, struct minheapnode *minnode)
 // arranges the array elements to form a valid minheap
 void buildminheap(struct minheap *minh)
 {
-    int n = minh->size - 1;
+    int n = minh->size;
 
     // (n-1)/2 is the index of the last non leaf node since the heap is represented as an array
     for (int i = (n - 1) / 2; i >= 0; --i)
