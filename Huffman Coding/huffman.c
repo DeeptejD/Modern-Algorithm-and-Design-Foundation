@@ -1,186 +1,229 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define N 50
-// #define sint(x) scanf("%d", &x)
+#include <string.h>
+#define sint(x) scanf("%d", &x)
+#define N 100
 
-// we will use a minheap to make sure that the node with the least frequency is always at the top
-struct minheapnode
+struct node
 {
-    char item;
     int freq;
-    struct minheapnode *left, *right;
+    char c;
+    struct node *next, *left, *right;
 };
 
-struct minheap
-{
-    int size, cap;
-    struct minheapnode **array; // nodes in the minheap are stored as an array
-};
+struct node *start = NULL;
 
-// make a new node
-struct minheapnode *newnode(char item, int freq)
-{
-    struct minheapnode *temp = (struct minheapnode *)malloc(sizeof(struct minheapnode));
-    temp->left = temp->right = NULL;
-    temp->item = item, temp->freq = freq;
+greatest = 0; // this holds the greatest freq
 
-    return temp;
-}
-
-// make minheap
-struct minheap *createminh(int cap)
-{
-    struct minheap *minh = (struct minheap *)malloc(sizeof(struct minheap));
-    minh->size = 0, minh->cap = cap; // size = 0 because init no nodes, cap = max nodes heap can hold
-
-    minh->array = (struct minheapnode **)malloc(minh->cap * sizeof(struct minheapnode *)); // allocates enough size to the array to hold all the minheap nodes
-
-    return minh;
-}
-
-void _swap(struct minheapnode **a, struct minheapnode **b)
-{
-    struct minheapnode *temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-// heapify: maintains the minheap property
-void heapify(struct minheap *minh, int current_index)
-{
-    int smallest = current_index, left = 2 * current_index + 1, right = 2 * current_index + 2;
-
-    if (left < minh->size && minh->array[left]->freq < minh->array[smallest]->freq)
-        smallest = left;
-
-    if (right < minh->size && minh->array[right]->freq < minh->array[smallest]->freq)
-        smallest = right;
-
-    if (smallest != current_index)
-    {
-        _swap(&minh->array[smallest], &minh->array[current_index]);
-        heapify(minh, smallest);
-    }
-}
-
-int checksize(struct minheap *minh)
-{
-    return (minh->size == 1);
-}
-
-struct minheapnode *getminnode(struct minheap *minh)
-{
-    struct minheapnode *temp = minh->array[0];
-    minh->array[0] = minh->array[minh->size - 1];
-    --minh->size;
-
-    heapify(minh, 0);
-
-    return temp;
-}
-
-void insert(struct minheap *minh, struct minheapnode *minnode)
-{
-    ++minh->size;
-    int i = minh->size - 1;
-    while (i && minnode->freq < minh->array[(i - 1) / 2]->freq)
-    {
-        minh->array[i] = minh->array[(i - 1) / 2];
-        i = (i - 1) / 2;
-    }
-    minh->array[i] = minnode;
-}
-
-// arranges the array elements to form a valid minheap
-void buildminheap(struct minheap *minh)
-{
-    int n = minh->size;
-
-    // (n-1)/2 is the index of the last non leaf node since the heap is represented as an array
-    for (int i = (n - 1) / 2; i >= 0; --i)
-        heapify(minh, i);
-}
-
-int isleaf(struct minheapnode *root)
-{
-    return (!(root->left) && !(root->right));
-}
-
-struct minheap *createandbuild(char item[], int freq[], int size)
-{
-    struct minheap *minh = createminh(size);
-
-    for (int i = 0; i < size; ++i)
-        minh->array[i] = newnode(item[i], freq[i]);
-
-    minh->size = size;
-    buildminheap(minh);
-
-    return minh;
-}
-
-struct minheapnode *buildhuffman(char item[], int freq[], int size)
-{
-    struct minheapnode *left, *right, *top;
-    struct minheap *minh = createandbuild(item, freq, size);
-
-    while (!checksize(minh))
-    {
-        left = getminnode(minh);
-        right = getminnode(minh);
-
-        top = newnode('$', left->freq + right->freq);
-
-        top->left = left, top->right = right;
-
-        insert(minh, top);
-    }
-    return getminnode(minh);
-}
-
-void show(int arr[], int n)
+void addatend(char c[], int f[], int n)
 {
     for (int i = 0; i < n; i++)
-        printf("%d", arr[i]);
+    {
+
+        if (start == NULL)
+        {
+            start = (struct node *)malloc(sizeof(struct node));
+            start->c = c[i], start->freq = f[i], start->next = NULL, start->left = NULL, start->right = NULL;
+        }
+        else
+        {
+            struct node *ptr = start;
+
+            while (ptr->next != NULL)
+                ptr = ptr->next;
+            struct node *temp = (struct node *)malloc(sizeof(struct node));
+            temp->c = c[i], temp->freq = f[i];
+            temp->next = temp->left = temp->right = NULL, ptr->next = temp;
+        }
+    }
+}
+void showlist()
+{
+    struct node *ptr = start;
+    while (ptr != NULL)
+    {
+        printf("(%c, %d), ", ptr->c, ptr->freq);
+        ptr = ptr->next;
+    }
     printf("\n");
 }
 
-void huffcodes(struct minheapnode *root, int arr[], int top)
+struct node *delfront()
 {
-    if (root->left)
+    struct node *temp = start;
+    start = start->next;
+    return temp;
+}
+
+void addafterliketerms(struct node *temp)
+{
+    // check if there is only one
+    if (start == NULL)
+        start = temp;
+    else if (start->next == NULL) // only one term
     {
-        arr[top] = 0;
-        huffcodes(root->left, arr, top + 1);
+        if (temp->freq < start->freq)
+        {
+            temp->next = start;
+            start = temp;
+        }
+        else
+        {
+            temp->next = start->next;
+            start->next = temp;
+        }
     }
-    if (root->right)
+    else
     {
-        arr[top] = 1;
-        huffcodes(root->right, arr, top + 1);
-    }
-    if (isleaf(root))
-    {
-        printf("%c\t", root->item);
-        show(arr, top);
+        int found = 0;
+        struct node *at, *ptr = start;
+        while (ptr != NULL)
+        {
+            if (ptr->freq == temp->freq)
+            {
+                found = 1, at = ptr;
+                break;
+            }
+            ptr = ptr->next;
+        }
+        ptr = start;
+        if (found)
+        {
+            struct node *ptr = at;
+            while (ptr->next->freq == temp->freq && ptr->next != NULL)
+                ptr = ptr->next;
+            temp->next = ptr->next;
+            ptr->next = temp;
+        }
+        else
+        {
+            ptr = start;
+            while (ptr->next->freq <= temp->freq && ptr != NULL)
+                ptr = ptr->next;
+            if (ptr != NULL)
+            {
+                temp->next = ptr->next;
+                ptr->next = temp;
+            }
+            else
+            {
+                ptr = start;
+                while (ptr->next != NULL)
+                    ptr = ptr->next;
+                temp->next = ptr->next;
+                ptr->next = temp;
+            }
+        }
     }
 }
 
-void huffman(char item[], int freq[], int size)
+void ins_end(struct node *temp)
 {
-    struct minheapnode *root = buildhuffman(item, freq, size);
-    int arr[N], top = 0;
-    huffcodes(root, arr, top);
+    if (start == NULL)
+        temp->next = NULL, start = temp;
+    else
+    {
+        struct node *ptr = start;
+        while (ptr->next != NULL)
+            ptr = ptr->next;
+        temp->next = ptr->next;
+        ptr->next = temp;
+    }
+}
+
+void huffman()
+{
+    if (!start)
+        return;
+
+    while (start->next != NULL)
+    {
+        struct node *a = delfront(), *b = delfront(), *temp = (struct node *)malloc(sizeof(struct node));
+        temp->c = '#', temp->freq = a->freq + b->freq, temp->left = a, temp->right = b, temp->next = NULL;
+        if (temp->freq >= greatest)
+            greatest = temp->freq, ins_end(temp);
+        else
+            addafterliketerms(temp);
+        showlist();
+        printf("\n");
+    }
+}
+
+void printcodes(struct node *root, int path[], int stringlen)
+{
+    if (root == NULL)
+        return;
+
+    if (root->left == NULL && root->right == NULL)
+    {
+        for (int i = 0; i < stringlen; i++)
+            printf("%d", path[i]);
+        printf("\t%c\n", root->c);
+    }
+
+    // left tree
+    path[stringlen] = 0;
+    printcodes(root->left, path, stringlen + 1);
+
+    // right tree
+    path[stringlen] = 1;
+    printcodes(root->right, path, stringlen + 1);
+}
+
+void findgreatest()
+{
+    struct node *ptr = start;
+    while (ptr->next != NULL)
+        ptr = ptr->next;
+    greatest = ptr->freq;
 }
 
 int main(int argc, char const *argv[])
 {
-    char arr[] = {'d', 'o', 'g', 's', 'n', 't', 'p', 'h', 'r', 'c', 'a'};
-    int freq[] = {2, 7, 1, 4, 1, 5, 2, 1, 1, 1, 1};
-    // char arr[] = {'A', 'B', 'C', 'D'};
-    // int freq[] = {5, 1, 6, 3};
-    // char arr[] = {'t', 'h', 'i', 's', 'a', 'o', 'd', 'y', '-'};
-    // int freq[] = {2, 2, 2, 2, 1, 1, 1, 4};
-    int size = sizeof(arr) / sizeof(arr[0]);
+    // char arr[] = {'g', 'n', 'h', 'r', 'c', 'a', 'd', 'p', 's', 't', 'o'};
+    // int freq[] = {1, 1, 1, 1, 1, 1, 2, 2, 4, 5, 7};
+    char arr[] = {'o', 'd', 'y', 't', 'h', 'i', 's', 'a', ' '};
+    int freq[] = {1, 1, 1, 2, 2, 2, 2, 2, 4};
+    printf("%d\n", strlen(arr));
+    addatend(arr, freq, strlen(arr) - 1);
+    showlist();
+    findgreatest();
+    huffman();
+    int path[N];
     printf("Huffman Codes\n");
-    huffman(arr, freq, size);
+    printcodes(start, path, 0);
+
     return 0;
 }
+
+/*
+Output
+
+Huffman Codes
+00      t
+0100    c
+0101    a
+011     s
+10      o
+1100    d
+1101    p
+11100   g
+11101   n
+11110   h
+11111   r
+*/
+
+/*
+Output
+
+Huffman Codes
+00
+010     h
+011     i
+100     s
+101     a
+1100    o
+1101    d
+1110    y
+1111    t
+*/
