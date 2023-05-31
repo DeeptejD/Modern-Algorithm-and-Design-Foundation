@@ -54,8 +54,10 @@ void kmp(char t[N], char p[N], int n, int m)
 
 int main(int argc, char const *argv[])
 {
-    char t[] = "abcaabaccabacabaabb";
-    char p[] = "abacab";
+    // char t[] = "abcaabaccabacabaabb";
+    // char p[] = "abacab";
+    char t[] = "1100011010001010";
+    char p[] = "0010";
     kmp(t, p, strlen(t), strlen(p));
     return 0;
 }

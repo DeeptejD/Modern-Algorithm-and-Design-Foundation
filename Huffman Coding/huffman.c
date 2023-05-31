@@ -180,10 +180,10 @@ void findgreatest()
 
 int main(int argc, char const *argv[])
 {
-    // char arr[] = {'g', 'n', 'h', 'r', 'c', 'a', 'd', 'p', 's', 't', 'o'};
-    // int freq[] = {1, 1, 1, 1, 1, 1, 2, 2, 4, 5, 7};
-    char arr[] = {'o', 'd', 'y', 't', 'h', 'i', 's', 'a', ' '};
-    int freq[] = {1, 1, 1, 2, 2, 2, 2, 2, 4};
+    char arr[] = {'g', 'n', 'h', 'r', 'c', 'a', 'd', 'p', 's', 't', 'o'};
+    int freq[] = {1, 1, 1, 1, 1, 1, 2, 2, 4, 5, 7};
+    // char arr[] = {'o', 'd', 'y', 't', 'h', 'i', 's', 'a', ' '};
+    // int freq[] = {1, 1, 1, 2, 2, 2, 2, 2, 4};
     printf("%d\n", strlen(arr));
     addatend(arr, freq, strlen(arr) - 1);
     showlist();

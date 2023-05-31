@@ -49,8 +49,10 @@ void bm(char t[], char p[], int n, int m)
 
 int main(int argc, char const *argv[])
 {
-    char t[] = "abcaabaccabacabaabb";
-    char p[] = "abacab";
+    // char t[] = "abcaabaccabacabaabb";
+    // char p[] = "abacab";
+    char t[] = "21323422134561";
+    char p[] = "2342";
     bm(t, p, strlen(t), strlen(p));
     return 0;
 }
