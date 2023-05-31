@@ -13,7 +13,7 @@ struct node
 
 struct node *start = NULL;
 
-greatest = 0; // this holds the greatest freq
+int greatest = 0; // this holds the greatest freq
 
 void addatend(char c[], int f[], int n)
 {
