@@ -7,8 +7,7 @@ int f[N];
 
 int failure(char p[N], int m)
 {
-    int i, j;
-    i = 1, j = 0;
+    int i = 1, j = 0;
     f[0] = 0;
     while (i < m)
     {
@@ -20,10 +19,7 @@ int failure(char p[N], int m)
         else if (j > 0)
             j = f[j - 1];
         else
-        {
-            f[i] = 0;
-            i++;
-        }
+            f[i] = 0, i++;
     }
 }
 
