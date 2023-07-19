@@ -2,7 +2,7 @@
 #define sint(x) scanf("%d", &x)
 #define N 20
 
-int w[N], p[N], n, m, x[N], fp, fw, y[N];
+int w[N], p[N], n, m, x[N], fp = -1, fw = -1, y[N];
 
 void ratiosort(int p[], int w[], int n)
 {
@@ -48,7 +48,7 @@ void knap(int k, int cp, int cw)
         if ((cp + p[k] > fp) && (k == n))
         {
             fp = cp + p[k], fw = cw + w[k];
-            for (int j = 1; j <= k; j++)
+            for (int j = 1; j <= n; j++)
                 x[j] = y[j];
         }
     }
@@ -61,7 +61,7 @@ void knap(int k, int cp, int cw)
         if ((cp > fp) && (k == n))
         {
             fp = cp, fw = cw;
-            for (int j = 1; j <= k; j++)
+            for (int j = 1; j <= n; j++)
                 x[j] = y[j];
         }
     }

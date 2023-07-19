@@ -45,7 +45,7 @@ void allpair(int cost[][N], int a[][N], int n)
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             cost[i][j] = a[i][j];
-    fillz(cost, n);
+    fillz(cost, n); // zeroes in the principle diagonal
     for (int k = 0; k < n; k++)
     {
         for (int i = 0; i < n; i++)

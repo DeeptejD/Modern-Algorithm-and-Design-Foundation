@@ -1,0 +1,21 @@
+{
+	"Boilerplate": {
+		"prefix": "boi",
+		"body": [
+			"#include<stdio.h>",
+			"#include<limits.h>",
+			"${1:Headers}",
+			"#define N 30",
+			"#define sint(x) scanf(\"%d\", &x)",
+			"${2:Constants}",
+			"",
+			"int main(int argc, char const *argv[])",
+			"{",
+			"\t${3:Code!}",
+			"\t",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "Insert the default boilerplate for c codes"
+	}
+}
